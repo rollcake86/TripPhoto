@@ -12,16 +12,16 @@ import com.rollcake.tripPhoto.data.dto.TripDTO
 @Dao
 interface TripDao {
 
-    @Query(/* value = */ "SELECT * FROM reminders")
+    @Query(/* value = */ "SELECT * FROM trips")
     suspend fun getTrips(): List<TripDTO>?
 
-    @Query(/* value = */ "SELECT * FROM reminders where entry_id = :reminderId")
+    @Query(/* value = */ "SELECT * FROM trips where entry_id = :tripId")
     suspend fun getTripById(tripId: String): TripDTO?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTrip(trip: TripDTO)
 
-    @Query(/* value = */ "DELETE FROM reminders")
+    @Query(/* value = */ "DELETE FROM trips")
     suspend fun deleteAllTrips()
 
 }
