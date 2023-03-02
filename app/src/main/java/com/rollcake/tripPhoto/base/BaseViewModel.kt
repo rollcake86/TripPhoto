@@ -1,4 +1,4 @@
-package com.rollcake.tripPhoto.data.base
+package com.rollcake.tripPhoto.base
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -17,4 +17,5 @@ abstract class BaseViewModel(app: Application) : AndroidViewModel(app) {
     val showToast: SingleLiveEvent<String> = SingleLiveEvent()
     val showLoading: SingleLiveEvent<Boolean> = SingleLiveEvent()
     val showNoData: MutableLiveData<Boolean> = MutableLiveData()
+
 }

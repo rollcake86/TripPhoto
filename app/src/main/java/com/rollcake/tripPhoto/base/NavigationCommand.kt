@@ -1,4 +1,4 @@
-package com.rollcake.tripPhoto.data.base
+package com.rollcake.tripPhoto.base
 
 import androidx.navigation.NavDirections
 

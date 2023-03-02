@@ -32,7 +32,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
     buildFeatures {
         dataBinding true
         viewBinding true
@@ -87,5 +90,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     implementation "androidx.test.espresso:espresso-idling-resource:3.5.1"
 
+    //Koin
+    implementation "org.koin:koin-android:2.2.2"
+    implementation "org.koin:koin-androidx-viewmodel:2.2.2"
 
 }
