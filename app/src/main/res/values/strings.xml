@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">tripPhoto</string>
+    <string name="app_name">Korean Trip</string>
     <string name="google_maps_key">AIzaSyA5E85XZjrB5vPmiH8gnouZXspwleKfnB8</string>
     <string name="search_here">Search Here!</string>
+    <string name="login">Login</string>
+    <string name="korean_trip">Korean Trip</string>
+    <string name="logout">logout</string>
+    <string name="database_all_delete">database all delete</string>
+    <string name="logout_success">logout Success</string>
+    <string name="delete_all_data">Delete All TripData</string>
 </resources>
