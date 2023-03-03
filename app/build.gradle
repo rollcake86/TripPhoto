@@ -94,4 +94,12 @@ dependencies {
     implementation "org.koin:koin-android:2.2.2"
     implementation "org.koin:koin-androidx-viewmodel:2.2.2"
 
+
+    //moshi
+    implementation "com.squareup.moshi:moshi:1.9.3"
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
+
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
 }
