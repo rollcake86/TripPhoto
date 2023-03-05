@@ -23,6 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.rollcake.tripPhoto.R
+import com.rollcake.tripPhoto.network.TripApi
 import timber.log.Timber
 
 class MainFragment() : Fragment()  , OnMapReadyCallback{
@@ -76,10 +77,14 @@ class MainFragment() : Fragment()  , OnMapReadyCallback{
 
         view.findViewById<Button>(R.id.search_button).setOnClickListener {
             map.cameraPosition.target
+            viewModel.getTripProperties()
+
         }
 
         return view
     }
+
+
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onMapReady(googleMap: GoogleMap) {

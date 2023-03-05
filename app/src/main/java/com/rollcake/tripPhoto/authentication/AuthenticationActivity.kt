@@ -10,10 +10,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
+import androidx.lifecycle.viewModelScope
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.rollcake.tripPhoto.MainActivity
 import com.rollcake.tripPhoto.databinding.ActivityAuthenticationBinding
+import com.rollcake.tripPhoto.network.TripApi
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
@@ -37,6 +40,19 @@ class AuthenticationActivity : AppCompatActivity() {
         setContentView(view)
         binding.loginButton.setOnClickListener {
             launchSignInFlow()
+
+            //    serviceKey=hm3Ng%2Bp0hajUH1lyqqB1JTmURPuIidiOj%2BoR1I49TQDEJPB9eY9CrArmUXrlx1PQ1DqvA%2B%2FqNSJWJhFa73mamw%3D%3D&
+//    numOfRows=10&
+//    pageNo=1&
+//    MobileOS=ETC&
+//    MobileApp=AppTest&
+//    _type=json&
+//    listYN=Y&
+//    arrange=C&
+//    mapX=126.981611&
+//    mapY=37.568477&
+
+
         }
 
         viewModel.authenticationState.observe(this) { authenticationState ->
