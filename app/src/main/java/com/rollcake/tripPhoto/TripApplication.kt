@@ -29,14 +29,16 @@ class TripApplication : Application() {
         val myModule = module {
             viewModel {
                 MainViewModel(
-                    get(),
+                    get()
+                )
+            }
+            single {
+                SettingViewModel(
+                    get()
                 )
             }
             //Declare singleton definitions to be later injected using by inject()
             single {
-                SettingViewModel(
-                    get(),
-                )
                 MyListViewModel(
                     get(),
                     get() as TripDataSource
