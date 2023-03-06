@@ -49,7 +49,7 @@
                         android:textColor="@color/default_text_color" />
 
                     <TextView
-                        android:id="@+id/close_approach_date"
+                        android:id="@+id/trip_title_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -78,7 +78,7 @@
                             android:textColor="@color/default_text_color" />
 
                         <TextView
-                            android:id="@+id/absolute_magnitude"
+                            android:id="@+id/trip_addr_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -104,7 +104,7 @@
                     android:textColor="@color/default_text_color" />
 
                 <TextView
-                    android:id="@+id/estimated_diameter"
+                    android:id="@+id/trip_tel_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -120,7 +120,7 @@
                     android:textColor="@color/default_text_color" />
 
                 <TextView
-                    android:id="@+id/relative_velocity"
+                    android:id="@+id/trip_type_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -136,7 +136,7 @@
                     android:textColor="@color/default_text_color" />
 
                 <TextView
-                    android:id="@+id/distance_from_earth"
+                    android:id="@+id/trip_dist_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -146,6 +146,16 @@
 
             </LinearLayout>
         </ScrollView>
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/savetrip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
