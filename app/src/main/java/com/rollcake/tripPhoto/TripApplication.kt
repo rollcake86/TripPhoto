@@ -6,6 +6,7 @@ import com.rollcake.tripPhoto.authentication.FirebaseUserLiveData
 import com.rollcake.tripPhoto.data.TripDataSource
 import com.rollcake.tripPhoto.data.local.LocalDB
 import com.rollcake.tripPhoto.data.local.TripLocalRepository
+import com.rollcake.tripPhoto.ui.detail.DetailViewModel
 import com.rollcake.tripPhoto.ui.main.MainViewModel
 import com.rollcake.tripPhoto.ui.mylist.MyListViewModel
 import com.rollcake.tripPhoto.ui.setting.SettingViewModel
@@ -34,6 +35,12 @@ class TripApplication : Application() {
             }
             single {
                 SettingViewModel(
+                    get()
+                )
+            }
+
+            single {
+                DetailViewModel(
                     get()
                 )
             }

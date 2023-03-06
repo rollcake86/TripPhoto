@@ -9,4 +9,10 @@
     <string name="logout_success">logout Success</string>
     <string name="delete_all_data">Delete All TripData</string>
     <string name="setting">Setting</string>
+    <string name="trip_title">Trip Title</string>
+    <string name="trip_addr">Address</string>
+    <string name="trip_tel">Tel</string>
+    <string name="trip_contenttype">Type</string>
+    <string name="trip_distance">Distance from center of map</string>
+    <string name="m_unit_format">%f m</string>
 </resources>

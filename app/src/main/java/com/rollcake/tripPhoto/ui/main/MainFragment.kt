@@ -19,10 +19,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rollcake.tripPhoto.R
 import com.rollcake.tripPhoto.base.BaseFragment
 import com.rollcake.tripPhoto.base.NavigationCommand
@@ -38,6 +36,7 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
         fun newInstance() = MainFragment()
     }
     private lateinit var map: GoogleMap
+    private lateinit var selectedMarker: Marker
 
     @RequiresApi(Build.VERSION_CODES.Q)
     val requestPermissionLauncher =
@@ -86,6 +85,15 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
 
         }
 
+        view.findViewById<FloatingActionButton>(R.id.detail_btn).setOnClickListener {
+            for(i in _viewModel.tripData.value!!){
+                if(i.title == selectedMarker.title){
+                    _viewModel.navigationCommand.value = NavigationCommand.To(MainFragmentDirections.actionMainFragmentToDetailFragment(i))
+                }
+            }
+
+        }
+
         _viewModel.tripData.observe(viewLifecycleOwner) {
             for (item in it) {
                 map.addMarker(
@@ -106,6 +114,7 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         setMapStyle(map)
+        setPoiClick(map)
         enableMyLocation()
     }
 
@@ -146,6 +155,15 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
             )
         }
     }
+
+    private fun setPoiClick(map: GoogleMap) {
+        map.setOnMarkerClickListener {
+            this.view?.findViewById<FloatingActionButton>(R.id.detail_btn)?.visibility = View.VISIBLE
+            selectedMarker = it
+            false }
+    }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
