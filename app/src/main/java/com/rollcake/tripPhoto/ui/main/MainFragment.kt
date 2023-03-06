@@ -8,15 +8,14 @@ import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -25,18 +24,20 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rollcake.tripPhoto.R
+import com.rollcake.tripPhoto.base.BaseFragment
+import com.rollcake.tripPhoto.base.NavigationCommand
 import com.rollcake.tripPhoto.network.TripApi
+import com.rollcake.utils.setDisplayHomeAsUpEnabled
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
-class MainFragment() : Fragment()  , OnMapReadyCallback{
+class MainFragment() : BaseFragment()  , OnMapReadyCallback{
 
+    override val _viewModel: MainViewModel by inject()
     companion object {
         fun newInstance() = MainFragment()
     }
-
-    private lateinit var viewModel: MainViewModel
     private lateinit var map: GoogleMap
-    private var currentLocation: LatLng = LatLng(-33.852, 151.211)
 
     @RequiresApi(Build.VERSION_CODES.Q)
     val requestPermissionLauncher =
@@ -64,7 +65,6 @@ class MainFragment() : Fragment()  , OnMapReadyCallback{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -73,17 +73,20 @@ class MainFragment() : Fragment()  , OnMapReadyCallback{
     ): View {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
+        setHasOptionsMenu(true)
+        setDisplayHomeAsUpEnabled(false)
+
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         view.findViewById<Button>(R.id.search_button).setOnClickListener {
             val target = map.cameraPosition.target
-            viewModel.getTripProperties(target.latitude , target.longitude)
+            _viewModel.getTripProperties(target.latitude , target.longitude)
 
         }
 
-        viewModel.tripData.observe(viewLifecycleOwner) {
+        _viewModel.tripData.observe(viewLifecycleOwner) {
             for (item in it) {
                 map.addMarker(
                     MarkerOptions()
@@ -108,8 +111,6 @@ class MainFragment() : Fragment()  , OnMapReadyCallback{
 
     private fun setMapStyle(map: GoogleMap) {
         try {
-            // Customize the styling of the base map using a JSON object defined
-            // in a raw resource file.
             val success = map.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                     requireContext(),
@@ -144,5 +145,22 @@ class MainFragment() : Fragment()  , OnMapReadyCallback{
                 )
             )
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.setting -> {
+                _viewModel.navigationCommand.value =
+                    NavigationCommand.To(MainFragmentDirections.actionMainFragmentToSettingFragment())
+            }
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+//        display logout as menu item
+        inflater.inflate(R.menu.main_menu, menu)
     }
 }
