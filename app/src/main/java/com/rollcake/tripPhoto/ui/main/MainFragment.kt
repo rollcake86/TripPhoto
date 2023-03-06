@@ -20,8 +20,10 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import com.rollcake.tripPhoto.R
 import com.rollcake.tripPhoto.network.TripApi
 import timber.log.Timber
@@ -76,11 +78,22 @@ class MainFragment() : Fragment()  , OnMapReadyCallback{
         mapFragment.getMapAsync(this)
 
         view.findViewById<Button>(R.id.search_button).setOnClickListener {
-            map.cameraPosition.target
-            viewModel.getTripProperties()
+            val target = map.cameraPosition.target
+            viewModel.getTripProperties(target.latitude , target.longitude)
 
         }
 
+        viewModel.tripData.observe(viewLifecycleOwner) {
+            for (item in it) {
+                map.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(item.mapy.toDouble() , item.mapx.toDouble()))
+                        .title(item.title)
+                        .snippet(item.addr1)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                )
+            }
+        }
         return view
     }
 
