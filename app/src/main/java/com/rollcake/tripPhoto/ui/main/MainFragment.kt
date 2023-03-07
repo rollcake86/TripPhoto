@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -164,7 +165,8 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
             map.isMyLocationEnabled = true
-            Toast.makeText(context, "Location permission is granted.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.location_permission_success), Toast.LENGTH_SHORT).show()
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.565117,126.9927), 15f))
         } else {
             requestPermissionLauncher.launch(
                 arrayOf(
