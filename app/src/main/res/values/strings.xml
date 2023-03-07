@@ -18,4 +18,5 @@
     <string name="savetrip">Save Trip</string>
     <string name="no_data">No Data</string>
     <string name="trip_save">Trip Saved!!</string>
+    <string name="trip_remove">Remove Trip</string>
 </resources>

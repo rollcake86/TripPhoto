@@ -52,15 +52,23 @@ class DetailFragment : BaseFragment() {
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
         }
-
-//        view.findViewById<TextView>(R.id.trip_title_textview).text = trip.title
-//        view.findViewById<TextView>(R.id.trip_addr_textview).text = trip.addr1
         view.findViewById<TextView>(R.id.trip_dist_textview).text = "${trip.dist.toDouble().toInt()} m"
-//        view.findViewById<TextView>(R.id.trip_tel_textview).text = trip.tel
         view.findViewById<TextView>(R.id.trip_type_textview).text = contentTypeId(trip.contenttypeid)
 
         view.findViewById<Button>(R.id.save_btn).setOnClickListener {
-            _viewModel.saveReminder(trip)
+            if(_viewModel.saveCheck.value!!){
+                _viewModel.removeTrip(trip)
+            }else{
+                _viewModel.saveTrip(trip)
+            }
+        }
+        _viewModel.saveCheck(trip)
+        _viewModel.saveCheck.observe(viewLifecycleOwner){
+            if(it) {
+                view.findViewById<Button>(R.id.save_btn).setText(getString(R.string.trip_remove))
+            } else {
+                view.findViewById<Button>(R.id.save_btn).setText(getString(R.string.trip_save))
+            }
         }
     }
 
