@@ -22,128 +22,138 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/marker_image"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <ScrollView
-            android:layout_width="0dp"
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/trip_title"
+            android:textColor="@color/default_text_color"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/trip_title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:text="@{Trip.title}"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:text="gwangjin " />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/trip_title"
-                        android:textColor="@color/default_text_color" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/trip_addr"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trip_title_textview" />
 
-                    <TextView
-                        android:id="@+id/trip_title_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@{Trip.title}"
-                        android:textColor="@color/default_text_color"
-                        tools:text="gwangjin " />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+        <TextView
+            android:id="@+id/trip_addr_textview"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:text="@{Trip.addr1}"
+            android:lines="2"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:text="경기도 서울 아프리카" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/help_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/map_outlink"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trip_title_textview"
+            app:srcCompat="@drawable/baseline_map_24" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/trip_addr"
-                            android:textColor="@color/default_text_color" />
 
-                        <TextView
-                            android:id="@+id/trip_addr_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textColor="@color/default_text_color"
-                            android:text="@{Trip.addr1}"
-                            tools:text="경기도 서울 아프리카" />
-                    </LinearLayout>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/trip_tel"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trip_addr_textview" />
 
-                    <ImageView
-                        android:id="@+id/help_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        app:srcCompat="@drawable/baseline_map_24" />
+        <TextView
+            android:id="@+id/trip_tel_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:text="@{Trip.tel}"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            tools:text="010111122222" />
 
-                </LinearLayout>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/trip_contenttype"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trip_tel_textview" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/trip_tel"
-                    android:textColor="@color/default_text_color" />
+        <TextView
+            android:id="@+id/trip_type_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:text="Food" />
 
-                <TextView
-                    android:id="@+id/trip_tel_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/default_text_color"
-                    android:text="@{Trip.tel}"
-                    tools:text="010111122222" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/trip_distance"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trip_type_textview" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/trip_contenttype"
-                    android:textColor="@color/default_text_color" />
-
-                <TextView
-                    android:id="@+id/trip_type_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/default_text_color"
-                    tools:text="Food" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/trip_distance"
-                    android:textColor="@color/default_text_color" />
-
-                <TextView
-                    android:id="@+id/trip_dist_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/default_text_color"
-                    tools:text="120m" />
-
-            </LinearLayout>
-        </ScrollView>
+        <TextView
+            android:id="@+id/trip_dist_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:text="120m" />
 
         <Button
             android:id="@+id/save_btn"
