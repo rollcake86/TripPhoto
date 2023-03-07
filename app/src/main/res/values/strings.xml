@@ -19,4 +19,5 @@
     <string name="no_data">No Data</string>
     <string name="trip_save">Trip Saved!!</string>
     <string name="trip_remove">Remove Trip</string>
+    <string name="history">My Favorite Place</string>
 </resources>

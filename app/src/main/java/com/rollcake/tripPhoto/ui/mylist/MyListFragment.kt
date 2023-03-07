@@ -13,6 +13,7 @@ import com.rollcake.tripPhoto.base.BaseViewModel
 import com.rollcake.tripPhoto.base.NavigationCommand
 import com.rollcake.tripPhoto.databinding.FragmentTripsBinding
 import com.rollcake.utils.setDisplayHomeAsUpEnabled
+import com.rollcake.utils.setTitle
 import com.rollcake.utils.setup
 import org.koin.android.ext.android.inject
 
@@ -32,8 +33,7 @@ class MyListFragment : BaseFragment(){
 
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(true)
-
-        binding.refreshLayout.setOnRefreshListener { _viewModel.loadTrips() }
+        setTitle(getString(R.string.history))
 
         return binding.root
     }
