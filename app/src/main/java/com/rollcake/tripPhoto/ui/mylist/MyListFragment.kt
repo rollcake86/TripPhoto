@@ -52,6 +52,7 @@ class MyListFragment : BaseFragment(){
 
     private fun setupRecyclerView() {
         val adapter = TripsListAdapter {
+            _viewModel.navigationCommand.value = NavigationCommand.To(MyListFragmentDirections.actionMyListFragmentToDetailFragment(it))
         }
         binding.reminderssRecyclerView.setup(adapter)
     }

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class MyListViewModel(val app: Application, private val dataSource: TripDataSource) :
     BaseViewModel(app) {
-    val tripsList = MutableLiveData<List<TripsDataItem>>()
+    val tripsList = MutableLiveData<List<TripProperty>>()
 
     fun loadTrips() {
         showLoading.postValue(true)
@@ -19,20 +19,7 @@ class MyListViewModel(val app: Application, private val dataSource: TripDataSour
             showLoading.postValue(false)
             when (result) {
                 is com.rollcake.tripPhoto.data.dto.Result.Success<*> -> {
-                    val dataList = ArrayList<TripsDataItem>()
-                    dataList.addAll((result.data as List<TripProperty>).map { trip ->
-                        TripsDataItem(
-                            contentid = trip.contentid,
-                            trip.title,
-                            trip.addr1,
-                            trip.tel,
-                            trip.contenttypeid,
-                            trip.firstimage,
-                            trip.mapy.toDouble(),
-                            trip.mapx.toDouble()
-                        )
-                    })
-                    tripsList.value = dataList
+                    tripsList.value = result.data!!
                 }
                 is com.rollcake.tripPhoto.data.dto.Result.Error ->
                     showSnackBar.value = result.message

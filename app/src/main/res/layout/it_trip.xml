@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.rollcake.tripPhoto.ui.mylist.TripsDataItem" />
+            type="com.rollcake.tripPhoto.network.TripProperty" />
     </data>
 
     <androidx.cardview.widget.CardView
