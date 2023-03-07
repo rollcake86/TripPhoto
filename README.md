@@ -33,17 +33,12 @@ You can search and check the travel places stored in the database even without I
 | Application includes at least three screens with distinct features using either the Android Navigation Controller or Explicit Intents | app/src/main/res/navigation/nav_main.xml |
 | The Navigation Controller is used for Fragment-based navigation and intents are utilized for Activity-based navigation. | app/src/main/java/com/rollcake/tripPhoto/base/BaseFragment.kt |
 | An application bundle is built to store data passed between Fragments and Activities. | app/src/main/res/navigation/nav_main.xml |
-| Application UI effectively utilizes ConstraintLayout
- to arrange UI elements effectively and efficiently across application features, avoiding nesting layouts and maintaining a flat UI structure where possible. | app/src/main/res/layout |
+| Application UI effectively utilizes ConstraintLayout to arrange UI elements effectively and efficiently across application features, avoiding nesting layouts and maintaining a flat UI structure where possible. | app/src/main/res/layout |
 | Data collections are displayed effectively, taking advantage of visual hierarchy and arrangement to display data in an easily consumable format. | app/src/main/res/layout |
-| Resources are stored appropriately using the internal res
- directory to store data in appropriate locations including string * values, drawables, colors, dimensions, and more. | app/src/main/res/values app/src/main/res/values-night |
-| Every element within ConstraintLayout should include the id
- field and at least 1 vertical constraint. | app/src/main/res/layout |
-| Data collections should be loaded into the application using ViewHolder pattern and appropriate View, such as RecyclerView
-. | app/src/main/java/com/rollcake/tripPhoto/ui/mylist/MyListFragment.kt |
-| Application contains at least 1 feature utilizing MotionLayout
- to adapt UI elements to a given function. This could include animating control elements onto and off screen, displaying and hiding a form, or animation of complex UI transitions. | app/src/main/res/layout/fragment_trips.xml |
+| Resources are stored appropriately using the internal res directory to store data in appropriate locations including string * values, drawables, colors, dimensions, and more. | app/src/main/res/values app/src/main/res/values-night |
+| Every element within ConstraintLayout should include the id field and at least 1 vertical constraint. | app/src/main/res/layout |
+| Data collections should be loaded into the application using ViewHolder pattern and appropriate View, such as RecyclerView. | app/src/main/java/com/rollcake/tripPhoto/ui/mylist/MyListFragment.kt |
+| Application contains at least 1 feature utilizing MotionLayout to adapt UI elements to a given function. This could include animating control elements onto and off screen, displaying and hiding a form, or animation of complex UI transitions. | app/src/main/res/layout/fragment_trips.xml |
 | MotionLayoutbehaviors are defined in a MotionScene using one or more Transition nodes and ConstraintSet blocks. | app/src/main/res/layout/fragment_trips.xml |
 | Constraints are defined within the scenes and house all layout params for the animation. | app/src/main/res/xml/scene_10_header.xml |
 | The Application connects to at least 1 external data source using Retrofit or other appropriate library/component and retrieves data for use within the application. | app/src/main/java/com/rollcake/tripPhoto/network/TripsApiService.kt |
@@ -55,8 +50,7 @@ You can search and check the travel places stored in the database even without I
 | The application utilizes storage mechanisms that best fit the data stored to store data locally on the device. Example: SharedPreferences for user settings or an internal database for data persistence for application data. Libraries such as https://developer.android.com/topic/libraries/architecture/room may be utilized to achieve this functionality. | app/src/main/java/com/rollcake/tripPhoto/data/local |
 | Data stored is accessible across user sessions. | app/src/main/java/com/rollcake/tripPhoto/data/local |
 | Data storage operations are performed on the appropriate threads as to not stall the UI thread. | app/src/main/java/com/rollcake/tripPhoto/data/local |
-| Data is structured with appropriate data types and scope as required by application functionality. | app/src/main/java/com/rollcake/tripPhoto/data/local
-app/src/main/java/com/rollcake/tripPhoto/network/TripProperty.kt |
+| Data is structured with appropriate data types and scope as required by application functionality. | app/src/main/java/com/rollcake/tripPhoto/data/local app/src/main/java/com/rollcake/tripPhoto/network/TripProperty.kt |
 | Application separates responsibilities amongst classes and structures using the MVVM Pattern:Fragments/Activities control the ViewsModels houses the data structures,ViewModel controls business logic.Application adheres to architecture best practices, such as the observer pattern, to prevent leaking components, such as Activity Contexts, and efficiently utilize system resources. | app/src/main/java/com/rollcake/tripPhoto/ui |
 | Beyond MVVM, the application handles system events, such as orientation changes, application switching, notifications, and similar events gracefully including, but not limited to: | app/src/main/java/com/rollcake/tripPhoto/ui |
 | Storing and restoring state and informationProperly handling lifecycle events in regards to behavior and functionalityImplement bundles to restore and save dataHandling interaction to and from the application via IntentsHandling Android Permissions | app/src/main/java/com/rollcake/tripPhoto/ui |
