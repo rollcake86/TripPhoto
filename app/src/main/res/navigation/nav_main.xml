@@ -9,5 +9,37 @@
         android:id="@+id/mainFragment"
         android:name="com.rollcake.tripPhoto.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_myListFragment"
+            app:destination="@id/myListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment" >
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.rollcake.tripPhoto.ui.setting.SettingFragment"
+        android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.rollcake.tripPhoto.ui.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument android:name="selectedTrip"
+            app:argType="com.rollcake.tripPhoto.network.TripProperty"/>
+    </fragment>
+    <fragment
+        android:id="@+id/myListFragment"
+        android:name="com.rollcake.tripPhoto.ui.mylist.MyListFragment"
+        android:label="MyListFragment" >
+        <action
+            android:id="@+id/action_myListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" >
+        </action>
+    </fragment>
 </navigation>

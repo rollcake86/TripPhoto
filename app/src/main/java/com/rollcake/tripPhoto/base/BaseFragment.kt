@@ -30,7 +30,7 @@ abstract class BaseFragment : Fragment() {
             Snackbar.make(this.requireView(), getString(it), Snackbar.LENGTH_LONG).show()
         })
 
-        _viewModel.navigationCommand.observe(this, Observer { command ->
+        _viewModel.navigationCommand.observe(this) { command ->
             when (command) {
                 is NavigationCommand.To -> findNavController().navigate(command.directions)
                 is NavigationCommand.Back -> findNavController().popBackStack()
@@ -39,6 +39,6 @@ abstract class BaseFragment : Fragment() {
                     false
                 )
             }
-        })
+        }
     }
 }
