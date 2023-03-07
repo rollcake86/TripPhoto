@@ -125,7 +125,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:textColor="@color/default_text_color"
-                    app:typeText="@{Trip.contenttypeid}"
                     tools:text="Food" />
 
                 <TextView
@@ -141,7 +140,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:textColor="@color/default_text_color"
-                    app:distText="@{Trip.dist}"
                     tools:text="120m" />
 
             </LinearLayout>

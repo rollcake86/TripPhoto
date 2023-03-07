@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,7 +25,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rollcake.tripPhoto.R
 import com.rollcake.tripPhoto.base.BaseFragment
 import com.rollcake.tripPhoto.base.NavigationCommand
+import com.rollcake.tripPhoto.databinding.FragmentMainBinding
 import com.rollcake.tripPhoto.network.TripApi
+import com.rollcake.tripPhoto.network.contentTypeId
+import com.rollcake.tripPhoto.network.contentTypeIdIcon
+import com.rollcake.tripPhoto.ui.detail.DetailFragmentArgs
 import com.rollcake.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
 import timber.log.Timber
@@ -37,6 +42,7 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
     }
     private lateinit var map: GoogleMap
     private lateinit var selectedMarker: Marker
+    private lateinit var binding : FragmentMainBinding
 
     @RequiresApi(Build.VERSION_CODES.Q)
     val requestPermissionLauncher =
@@ -70,29 +76,19 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
 
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+
+
+        binding.viewModel = _viewModel
+        binding.lifecycleOwner = this
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(false)
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        view.findViewById<Button>(R.id.search_button).setOnClickListener {
-            val target = map.cameraPosition.target
-            _viewModel.getTripProperties(target.latitude , target.longitude)
-
-        }
-
-        view.findViewById<FloatingActionButton>(R.id.detail_btn).setOnClickListener {
-            for(i in _viewModel.tripData.value!!){
-                if(i.title == selectedMarker.title){
-                    _viewModel.navigationCommand.value = NavigationCommand.To(MainFragmentDirections.actionMainFragmentToDetailFragment(i))
-                }
-            }
-
-        }
 
         _viewModel.tripData.observe(viewLifecycleOwner) {
             for (item in it) {
@@ -101,13 +97,36 @@ class MainFragment() : BaseFragment()  , OnMapReadyCallback{
                         .position(LatLng(item.mapy.toDouble() , item.mapx.toDouble()))
                         .title(item.title)
                         .snippet(item.addr1)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        .icon(tripIcon(item.contenttypeid))
                 )
             }
         }
-        return view
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<Button>(R.id.search_button).setOnClickListener {
+            val target = map.cameraPosition.target
+            _viewModel.getTripProperties(target.latitude , target.longitude)
+        }
+
+        view.findViewById<FloatingActionButton>(R.id.detail_btn).setOnClickListener {
+            for(i in _viewModel.tripData.value!!){
+                if(i.title == selectedMarker.title){
+                    _viewModel.navigationCommand.value = NavigationCommand.To(MainFragmentDirections.actionMainFragmentToDetailFragment(i))
+                }
+            }
+        }
+
+        view.findViewById<FloatingActionButton>(R.id.mylist_btn).setOnClickListener {
+            _viewModel.navigationCommand.value = NavigationCommand.To(MainFragmentDirections.actionMainFragmentToMyListFragment())
+        }
+    }
+
+    private fun tripIcon(contenttypeid: String): BitmapDescriptor? {
+        return BitmapDescriptorFactory.fromResource(contentTypeIdIcon(contenttypeid))
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.Q)

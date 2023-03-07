@@ -25,42 +25,24 @@ class MainViewModel(val app: Application ) :
         get() = _tripData
 
     fun getTripProperties(lat: Double, loc: Double) {
+        showLoading.postValue(true)
         viewModelScope.launch {
             val trip = TripApi.retrofitService.getProperties(
                 mapX = loc,
                 mapY = lat
             )
+            showLoading.postValue(false)
             val result = coroutineScope {
                 val deferred = async {
                     parseJsonResult(JSONObject(trip.await()))
                 }
                 deferred.await()
-
             }
             if (result.size == 0) {
                 showToast.value = "No Data"
             } else {
                 _tripData.value = result
             }
-        }
-    }
-
-    fun deleteTripData() {
-        showLoading.value = true
-        viewModelScope.launch {
-//            dataSource.deleteAllReminders()
-            showLoading.value = false
-            showToast.value = app.getString(R.string.delete_all_data)
-        }
-    }
-
-    fun logout(){
-        Timber.i("logout!!!")
-        showToast.value =  app.getString(R.string.logout_success)
-        AuthUI.getInstance().signOut(app) .addOnCompleteListener {
-            app.startActivity(
-                Intent(app , AuthenticationActivity::class.java).addFlags(
-                Intent.FLAG_ACTIVITY_NO_HISTORY))
         }
     }
 }

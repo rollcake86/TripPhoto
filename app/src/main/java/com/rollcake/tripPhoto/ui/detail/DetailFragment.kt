@@ -10,36 +10,41 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.rollcake.tripPhoto.R
 import com.rollcake.tripPhoto.base.BaseFragment
 import com.rollcake.tripPhoto.base.NavigationCommand
 import com.rollcake.tripPhoto.databinding.FragmentDetailBinding
-import com.rollcake.tripPhoto.databinding.FragmentSettingBinding
+import com.rollcake.tripPhoto.network.TripProperty
 import com.rollcake.tripPhoto.network.contentTypeId
 import com.rollcake.utils.setDisplayHomeAsUpEnabled
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 class DetailFragment : BaseFragment() {
 
     override val _viewModel: DetailViewModel by inject()
     private lateinit var binding: FragmentDetailBinding
-
+    lateinit var trip : TripProperty
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
-        val trip = DetailFragmentArgs.fromBundle(requireArguments()).selectedTrip
-        Glide.with(this.requireContext()).load(trip.firstimage).into(view.findViewById<ImageView>(R.id.imageView2))
+        trip = DetailFragmentArgs.fromBundle(requireArguments()).selectedTrip
+
         binding.trip = trip
         binding.lifecycleOwner = this
 
+        setHasOptionsMenu(true)
+        setDisplayHomeAsUpEnabled(true)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Glide.with(this.requireContext()).load(trip.firstimage).into(view.findViewById(R.id.imageView2))
         view.findViewById<ImageView>(R.id.help_button).setOnClickListener {
             val gmmIntentUri =
                 Uri.parse("geo:${trip.mapy},${trip.mapx}?q=${trip.title}")
@@ -48,25 +53,15 @@ class DetailFragment : BaseFragment() {
             startActivity(mapIntent)
         }
 
-        view.findViewById<TextView>(R.id.trip_title_textview).text = trip.title
-        view.findViewById<TextView>(R.id.trip_addr_textview).text = trip.addr1
+//        view.findViewById<TextView>(R.id.trip_title_textview).text = trip.title
+//        view.findViewById<TextView>(R.id.trip_addr_textview).text = trip.addr1
         view.findViewById<TextView>(R.id.trip_dist_textview).text = "${trip.dist.toDouble().toInt()} m"
-        view.findViewById<TextView>(R.id.trip_tel_textview).text = trip.tel
+//        view.findViewById<TextView>(R.id.trip_tel_textview).text = trip.tel
         view.findViewById<TextView>(R.id.trip_type_textview).text = contentTypeId(trip.contenttypeid)
 
-        view.findViewById<ImageView>(R.id.save_btn).setOnClickListener {
-
-
+        view.findViewById<Button>(R.id.save_btn).setOnClickListener {
+            _viewModel.saveReminder(trip)
         }
-
-        setHasOptionsMenu(true)
-        setDisplayHomeAsUpEnabled(true)
-        return view.rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

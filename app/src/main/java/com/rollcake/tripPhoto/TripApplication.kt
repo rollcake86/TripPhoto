@@ -5,6 +5,7 @@ import com.google.firebase.FirebaseApp
 import com.rollcake.tripPhoto.authentication.FirebaseUserLiveData
 import com.rollcake.tripPhoto.data.TripDataSource
 import com.rollcake.tripPhoto.data.local.LocalDB
+import com.rollcake.tripPhoto.data.local.TripDao
 import com.rollcake.tripPhoto.data.local.TripLocalRepository
 import com.rollcake.tripPhoto.ui.detail.DetailViewModel
 import com.rollcake.tripPhoto.ui.main.MainViewModel
@@ -19,11 +20,14 @@ import timber.log.Timber
 class TripApplication : Application() {
 
     lateinit var firebaseUserLiveData : FirebaseUserLiveData
+    lateinit var tripDao: TripDao
+    lateinit var tripDataSource: TripDataSource
 
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
-        LocalDB.createRemindersDao(this)
+        tripDao = LocalDB.createTripsDao(this)
+        tripDataSource = TripLocalRepository(tripDao)
         Timber.asTree()
         firebaseUserLiveData = FirebaseUserLiveData()
 
@@ -38,21 +42,19 @@ class TripApplication : Application() {
                     get()
                 )
             }
-
             single {
                 DetailViewModel(
-                    get()
+                    get(),
+                    tripDataSource
                 )
             }
-            //Declare singleton definitions to be later injected using by inject()
             single {
                 MyListViewModel(
                     get(),
-                    get() as TripDataSource
+                    tripDataSource
                 )
             }
-            single { TripLocalRepository(get()) }
-            single { LocalDB.createRemindersDao(this@TripApplication) }
+
         }
 
         startKoin {

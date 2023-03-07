@@ -16,4 +16,6 @@
     <string name="trip_distance">Distance from center of map</string>
     <string name="m_unit_format">%f m</string>
     <string name="savetrip">Save Trip</string>
+    <string name="no_data">No Data</string>
+    <string name="trip_save">Trip Saved!!</string>
 </resources>

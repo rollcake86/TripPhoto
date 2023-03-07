@@ -8,7 +8,7 @@ import androidx.room.Room
  */
 object LocalDB {
 
-    fun createRemindersDao(context: Context): TripDao {
+    fun createTripsDao(context: Context): TripDao {
         return Room.databaseBuilder(
             context.applicationContext,
             TripsDatabase::class.java, "trips.db"

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rollcake.tripPhoto.data.dto.TripDTO
+import com.rollcake.tripPhoto.network.TripProperty
 
 /**
  * Data Access Object for the reminders table.
@@ -13,13 +13,13 @@ import com.rollcake.tripPhoto.data.dto.TripDTO
 interface TripDao {
 
     @Query(/* value = */ "SELECT * FROM trips")
-    suspend fun getTrips(): List<TripDTO>?
+    suspend fun getTrips(): List<TripProperty>?
 
-    @Query(/* value = */ "SELECT * FROM trips where entry_id = :tripId")
-    suspend fun getTripById(tripId: String): TripDTO?
+    @Query(/* value = */ "SELECT * FROM trips where contentid = :tripId")
+    suspend fun getTripById(tripId: String): TripProperty?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveTrip(trip: TripDTO)
+    suspend fun saveTrip(trip: TripProperty)
 
     @Query(/* value = */ "DELETE FROM trips")
     suspend fun deleteAllTrips()
