@@ -21,4 +21,6 @@
     <string name="trip_remove">Remove Trip</string>
     <string name="history">My Favorite Place</string>
     <string name="location_permission_success">Location permission is granted</string>
+    <string name="marker_image">Marker Image</string>
+    <string name="map_outlink">googleMap Outlink</string>
 </resources>
