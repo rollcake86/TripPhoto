@@ -44,7 +44,7 @@ class DetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(this.requireContext()).load(trip.firstimage).into(view.findViewById(R.id.imageView2))
+        Glide.with(this.requireContext()).load(trip.firstimage).error(R.drawable.korea_trip).into(view.findViewById(R.id.imageView2))
         view.findViewById<ImageView>(R.id.help_button).setOnClickListener {
             val gmmIntentUri =
                 Uri.parse("geo:${trip.mapy},${trip.mapx}?q=${trip.title}")
