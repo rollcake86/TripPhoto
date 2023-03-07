@@ -30,27 +30,3 @@ data class TripProperty(
     val title : String,
 ) : Parcelable
 
-@Parcelize
-data class TripAPIProperty(
-    val response : header,
-    val body : body
-) : Parcelable
-
-@Parcelize
-data class header(
-    val resultCode : String,
-    val resultMsg : String,
-) : Parcelable
-
-@Parcelize
-data class body(
-    val items: item ,
-    val numOfRows : Int,
-    val pageNo : Int,
-    val totalCount : Int,
-) : Parcelable
-
-@Parcelize
-data class item(
-    val item : List<TripProperty>
-) : Parcelable

@@ -33,6 +33,7 @@ abstract class BaseRecyclerViewAdapter<T>(private val callback: ((item: T) -> Un
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
         val item = getItem(position)
+        Log.e("TAGTAG2" , item.toString())
         holder.bind(item)
         holder.itemView.setOnClickListener {
             callback?.invoke(item)

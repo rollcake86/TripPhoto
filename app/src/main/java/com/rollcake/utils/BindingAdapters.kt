@@ -1,10 +1,13 @@
 package com.rollcake.utils
 
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.rollcake.tripPhoto.base.BaseRecyclerViewAdapter
+import com.rollcake.tripPhoto.network.contentTypeIdIcon
 
 
 object BindingAdapters {
@@ -43,5 +46,11 @@ object BindingAdapters {
                     view.fadeOut()
             }
         }
+    }
+
+    @BindingAdapter("android:show_image")
+    @JvmStatic
+    fun setImageVisible(view: ImageView, contentTypeId : String) {
+        view.setImageResource(contentTypeIdIcon(contentTypeId))
     }
 }
